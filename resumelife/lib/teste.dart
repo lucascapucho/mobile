@@ -17,16 +17,12 @@ class _BaseLayoutState extends State<BaseLayout> {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(primaryColor: Colors.purple),
-      debugShowCheckedModeBanner: false,
+      debugShowCheckedModeBanner: true,
       home: Scaffold(
-        appBar: AppBar(
-          title: Text("Flutter Background Image - FlutterCorner"),
-        ),
         body: Container(
           decoration: BoxDecoration(
-            image: DecorationImage(
-              image: NetworkImage(
-                  "https://cdn.pixabay.com/photo/2015/08/28/16/38/stars-912134_960_720.jpg"),
+            image: new DecorationImage(
+              image: new AssetImage('images/background.png'),
               fit: BoxFit.cover,
             ),
           ),
