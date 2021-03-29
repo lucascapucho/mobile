@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'Widget/backgroundContainer.dart';
 import 'signupPage.dart';
+import 'notePage.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key key, this.title}) : super(key: key);
@@ -69,28 +70,33 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Widget _submitButton() {
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      padding: EdgeInsets.symmetric(vertical: 15),
-      alignment: Alignment.center,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(5)),
-          // boxShadow: <BoxShadow>[
-          //   BoxShadow(
-          //       color: Color(0xfffbb448),
-          //       offset: Offset(1, 2),
-          //       blurRadius: 5,
-          //       spreadRadius: .5)
-          // ],
-          gradient: LinearGradient(
-              begin: Alignment.centerLeft,
-              end: Alignment.centerRight,
-              colors: [Color(0xfffbb448), Color(0xfff7892b)])),
-      child: Text(
-        'Login',
-        style: TextStyle(fontSize: 20, color: Colors.white),
-      ),
-    );
+    return InkWell(
+        onTap: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => NotePage()));
+        },
+        child: Container(
+          width: MediaQuery.of(context).size.width,
+          padding: EdgeInsets.symmetric(vertical: 15),
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(5)),
+              // boxShadow: <BoxShadow>[
+              //   BoxShadow(
+              //       color: Color(0xfffbb448),
+              //       offset: Offset(1, 2),
+              //       blurRadius: 5,
+              //       spreadRadius: .5)
+              // ],
+              gradient: LinearGradient(
+                  begin: Alignment.centerLeft,
+                  end: Alignment.centerRight,
+                  colors: [Color(0xfffbb448), Color(0xfff7892b)])),
+          child: Text(
+            'Login',
+            style: TextStyle(fontSize: 20, color: Colors.white),
+          ),
+        ));
   }
 
   Widget _divider() {

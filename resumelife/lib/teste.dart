@@ -1,32 +1,38 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(BaseLayout());
-}
+import 'Widget/backgroundContainer.dart';
+import 'Widget/drawerMenu.dart';
 
-class BaseLayout extends StatefulWidget {
-  BaseLayout({Key key, this.title}) : super(key: key);
+class TestePage extends StatefulWidget {
+  TestePage({Key key, this.title}) : super(key: key);
 
   final String title;
+
   @override
-  _BaseLayoutState createState() => _BaseLayoutState();
+  _SignUpPageState createState() => _SignUpPageState();
 }
 
-class _BaseLayoutState extends State<BaseLayout> {
+class _SignUpPageState extends State<TestePage> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(primaryColor: Colors.purple),
-      debugShowCheckedModeBanner: true,
-      home: Scaffold(
-        body: Container(
-          decoration: BoxDecoration(
-            image: new DecorationImage(
-              image: new AssetImage('images/background.png'),
-              fit: BoxFit.cover,
-            ),
+    final height = MediaQuery.of(context).size.height;
+    return Scaffold(
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        title: Text("My notes"),
+        backgroundColor: Colors.transparent,
+        actions: [],
+        // elevation: .0,
+      ),
+      drawer: DrawerMenu(),
+      body: Container(
+        height: height,
+        child: Stack(children: <Widget>[
+          Center(
+            child: BackgroundContainer(),
           ),
-        ),
+          TextButton(child: Text("Open editor"), onPressed: () {}),
+        ]),
       ),
     );
   }
