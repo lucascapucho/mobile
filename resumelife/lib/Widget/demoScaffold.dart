@@ -6,6 +6,8 @@ import 'package:flutter_quill/models/documents/document.dart';
 import 'package:flutter_quill/widgets/controller.dart';
 import 'package:flutter_quill/widgets/toolbar.dart';
 
+import 'backgroundContainer.dart';
+
 typedef DemoContentBuilder = Widget Function(
     BuildContext context, QuillController controller);
 
@@ -63,7 +65,9 @@ class _DemoScaffoldState extends State<DemoScaffold> {
         _loading = false;
       });
     } catch (error) {
-      final doc = Document()..insert(0, 'Empty asset');
+      final doc = Document()
+        ..insert(0,
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean aliquam magna sed dictum finibus. Fusce lectus urna, consequat id risus finibus, tempor tempor massa. Sed nibh nisl, sodales in neque et, tempor euismod tellus. Aenean tristique turpis ut rutrum faucibus. Nunc id urna eu quam dapibus iaculis. Duis imperdiet molestie enim at porttitor. Aenean pulvinar rhoncus pulvinar. Ut imperdiet quam dui, tempus laoreet arcu faucibus malesuada. Vestibulum ut sodales quam. Quisque sed dictum metus. Curabitur metus eros, facilisis ac est sed, mollis facilisis erat. In tristique magna id maximus accumsan.");
       setState(() {
         _controller = QuillController(
             document: doc, selection: TextSelection.collapsed(offset: 0));
@@ -74,31 +78,54 @@ class _DemoScaffoldState extends State<DemoScaffold> {
 
   @override
   Widget build(BuildContext context) {
-    final actions = widget.actions ?? <Widget>[];
     return Scaffold(
       key: _scaffoldKey,
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Theme.of(context).canvasColor,
-        centerTitle: false,
-        titleSpacing: 0,
-        leading: IconButton(
-          icon: Icon(
-            Icons.chevron_left,
-            color: Colors.grey.shade800,
-            size: 18,
-          ),
-          onPressed: () => Navigator.pop(context),
-        ),
+        backgroundColor: Colors.transparent,
         title: _loading || widget.showToolbar == false
             ? null
             : QuillToolbar.basic(controller: _controller),
-        actions: actions,
+        actions: <Widget>[
+          Padding(
+            padding: EdgeInsets.only(right: 20.0),
+            child: GestureDetector(
+              onTap: () {
+                jsonEncode(_controller.document.toDelta().toJson());
+              },
+              child: Icon(
+                Icons.favorite,
+                size: 26.0,
+              ),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.only(right: 20.0),
+            child: GestureDetector(
+              onTap: () {},
+              child: Icon(
+                Icons.share,
+                size: 26.0,
+              ),
+            ),
+          ),
+        ],
       ),
-      floatingActionButton: widget.floatingActionButton,
-      body: _loading
-          ? Center(child: Text('Loading...'))
-          : widget.builder(context, _controller),
+      body: Container(
+        child: Stack(
+          children: <Widget>[
+            Center(
+              child: BackgroundContainer(),
+            ),
+            Container(
+              padding: EdgeInsets.fromLTRB(5.0, 89.0, 5.0, .0),
+              child: _loading
+                  ? Center(child: Text('Loading...'))
+                  : widget.builder(context, _controller),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

@@ -20,10 +20,6 @@ class _ReadOnlyPageState extends State<ReadOnlyPage> {
       documentFilename: 'sample_data.json',
       builder: _buildContent,
       showToolbar: _edit == true,
-      floatingActionButton: FloatingActionButton.extended(
-          label: Text(_edit == true ? 'Done' : 'Edit'),
-          onPressed: _toggleEdit,
-          icon: Icon(_edit == true ? Icons.check : Icons.edit)),
     );
   }
 
@@ -33,7 +29,6 @@ class _ReadOnlyPageState extends State<ReadOnlyPage> {
       child: Container(
         decoration: BoxDecoration(
           color: Colors.white,
-          border: Border.all(color: Colors.grey.shade200),
         ),
         child: QuillEditor(
           controller: controller,
@@ -47,11 +42,5 @@ class _ReadOnlyPageState extends State<ReadOnlyPage> {
         ),
       ),
     );
-  }
-
-  void _toggleEdit() {
-    setState(() {
-      _edit = !_edit;
-    });
   }
 }

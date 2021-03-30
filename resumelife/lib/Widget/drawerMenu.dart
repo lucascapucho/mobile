@@ -3,6 +3,7 @@ import 'package:resumelife/feedPage.dart';
 
 import 'package:resumelife/notePage.dart';
 import 'package:resumelife/profilePage.dart';
+import 'package:resumelife/welcomePage.dart';
 
 class DrawerMenu extends StatefulWidget {
   DrawerMenu({Key key}) : super(key: key);
@@ -66,14 +67,14 @@ class _DrawerMenuState extends State<DrawerMenu> {
                     MaterialPageRoute(builder: (context) => FeedPage()));
               },
             ),
-            // new ListTile(
-            //   leading: Icon(Icons.favorite, color: Colors.white),
-            //   title:
-            //       Text("Followed notes", style: TextStyle(color: Colors.white)),
-            //   onTap: () {
-            //     Navigator.pop(context);
-            //   },
-            // ),
+            new ListTile(
+              leading: Icon(Icons.logout, color: Colors.white),
+              title: Text("Log out", style: TextStyle(color: Colors.white)),
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => WelcomePage()));
+              },
+            ),
           ],
         ),
       ),

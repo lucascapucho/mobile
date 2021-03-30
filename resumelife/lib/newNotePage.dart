@@ -62,9 +62,9 @@ class _NewNotePageState extends State<NewNotePage> {
     }
 
     return Scaffold(
-      extendBodyBehindAppBar: true,
+      // extendBodyBehindAppBar: true,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.purple,
         // elevation: .0,
         title: Text('New note'),
         actions: <Widget>[

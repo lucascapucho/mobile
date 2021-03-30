@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:resumelife/editNotePage.dart';
+import 'package:resumelife/readOnlyPage.dart';
 
 import 'Widget/backgroundContainer.dart';
 import 'Widget/drawerMenu.dart';
@@ -24,7 +24,7 @@ class _FeedPageState extends State<FeedPage> {
         isThreeLine: true,
         onTap: () {
           Navigator.push(
-              context, MaterialPageRoute(builder: (context) => EditNotePage()));
+              context, MaterialPageRoute(builder: (context) => ReadOnlyPage()));
         },
       ),
     );
@@ -35,9 +35,9 @@ class _FeedPageState extends State<FeedPage> {
     final height = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      extendBodyBehindAppBar: true,
+      // extendBodyBehindAppBar: true,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.purple,
         // elevation: .0,
         title: Text('Global notes'),
       ),
@@ -49,7 +49,7 @@ class _FeedPageState extends State<FeedPage> {
             child: BackgroundContainer(),
           ),
           Container(
-            padding: EdgeInsets.fromLTRB(5.0, 89.0, 5.0, .0),
+            padding: EdgeInsets.fromLTRB(5.0, 10.0, 5.0, .0),
             child: TextField(
               style: TextStyle(fontSize: 16, color: Colors.white),
               decoration: InputDecoration(
@@ -71,7 +71,7 @@ class _FeedPageState extends State<FeedPage> {
             ),
           ),
           ListView(
-            padding: EdgeInsets.fromLTRB(.0, 150.0, .0, .0),
+            padding: EdgeInsets.fromLTRB(.0, 75.0, .0, .0),
             children: <Widget>[
               // Padding(padding: EdgeInsets.all(15.0)),
               _myCard(context, 'Title 1', 'Subtitle 1', 'Author 1', '29/03'),

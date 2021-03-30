@@ -203,7 +203,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
               ),
             ),
-            Positioned(top: 40, left: 0, child: _backButton()),
+            // Positioned(top: 40, left: 0, child: _backButton()),
           ],
         ),
       ),

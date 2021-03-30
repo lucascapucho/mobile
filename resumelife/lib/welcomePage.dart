@@ -144,7 +144,7 @@ class _WelcomePageState extends State<WelcomePage> {
                     SizedBox(
                       height: 20,
                     ),
-                    _label()
+                    // _label()
                   ],
                 ),
               ),

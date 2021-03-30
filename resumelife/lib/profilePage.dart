@@ -69,7 +69,7 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-  Widget _profileWidget() {
+  Widget _profileEntries() {
     return Column(
       children: <Widget>[
         _entryField("Username", TextInputType.name),
@@ -85,9 +85,9 @@ class _ProfilePageState extends State<ProfilePage> {
     final height = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      extendBodyBehindAppBar: true,
+      // extendBodyBehindAppBar: true,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.purple,
         // elevation: .0,
         title: Text('Profile details'),
       ),
@@ -100,17 +100,19 @@ class _ProfilePageState extends State<ProfilePage> {
               child: BackgroundContainer(),
             ),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 80.0),
+              padding: EdgeInsets.symmetric(horizontal: 20.0),
               child: SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    SizedBox(height: 50),
-                    _profileWidget(),
-                    SizedBox(height: 20),
+                    profilePicture(),
+                    _profileEntries(),
+                    SizedBox(
+                      height: 20,
+                    ),
                     _submitButton(),
-                    profileView(),
+                    SizedBox(height: height * .14),
                   ],
                 ),
               ),
@@ -121,11 +123,13 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-  Widget profileView() {
+  Widget profilePicture() {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
         Padding(
-          padding: const EdgeInsets.fromLTRB(.0, 100.0, 30.0, .0),
+          padding: const EdgeInsets.fromLTRB(.0, 15.0, .0, .0),
           child: Stack(
             children: <Widget>[
               CircleAvatar(

@@ -36,9 +36,9 @@ class _NotePageState extends State<NotePage> {
     final height = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      extendBodyBehindAppBar: true,
+      // extendBodyBehindAppBar: true,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.purple,
         // elevation: .0,
         title: Text('My notes'),
         actions: <Widget>[
