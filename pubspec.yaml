@@ -1,5 +1,5 @@
 name: resumelife
-description: A new Flutter project.
+description: Projeto de desenvolvimento mobile com fluter + firebase.
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `pub publish`. This is preferred for private packages.
@@ -18,19 +18,20 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
 
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   english_words: ^3.1.5
-  path_provider: ^2.0.1
-  flutter_quill: ^1.1.4
+  path_provider: ^2.0.1  
   search_widget:
+  flutter_quill: 
+  firebase_core: ^1.0.1
+  firebase_auth: ^1.0.1
+  google_sign_in: ^5.0.0
   
 
 dev_dependencies:
@@ -42,10 +43,6 @@ dev_dependencies:
 
 # The following section is specific to Flutter.
 flutter:
-
-  assets:
-  - images/
-  - google_fonts/
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
@@ -59,6 +56,10 @@ flutter:
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
+  assets:
+    - assets/
+    - assets/images/
+    - assets/google_fonts/
 
   # For details regarding adding assets from package dependencies, see
   # https://flutter.dev/assets-and-images/#from-packages
@@ -68,10 +69,10 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
+  fonts:
+    - family: Port Lligat
+      fonts:
+        - asset: assets/google_fonts/PortLligatSans-Regular.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro

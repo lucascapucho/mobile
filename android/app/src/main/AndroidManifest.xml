@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.resumelife">
+    package="com.capucho.resumelife_firebase">
    <application
         android:label="Resume"
         android:icon="@mipmap/ic_launcher">

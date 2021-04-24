@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "791357011849",
+    "project_id": "resumelife-1a995",
+    "storage_bucket": "resumelife-1a995.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:791357011849:android:8a25837240b239aa0c1358",
+        "android_client_info": {
+          "package_name": "com.capucho.resumelife_firebase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "791357011849-mh10h8c0hgbsoqkg9neofrpgplp3142o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBN7eHtmpGTT0VU1awVJKvmtUI33O1dxsU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "791357011849-mh10h8c0hgbsoqkg9neofrpgplp3142o.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "791357011849-7c0ap5agir05rnam5mnji14sc0i5tu2u.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.resumelife"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

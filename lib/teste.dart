@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-
-import 'Widget/backgroundContainer.dart';
-import 'Widget/drawerMenu.dart';
+import 'package:resumelife/widgets/backgroundContainer.dart';
+import 'package:resumelife/widgets/drawerMenu.dart';
 
 class TestePage extends StatefulWidget {
-  TestePage({Key key, this.title}) : super(key: key);
+  TestePage({required Key key, required this.title}) : super(key: key);
 
   final String title;
 
