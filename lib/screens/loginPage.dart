@@ -1,3 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:resumelife/utils/authentication.dart';
 import 'package:resumelife/widgets/backgroundContainer.dart';
@@ -15,7 +17,53 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final _formKey = GlobalKey<FormState>();
+  FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+  DatabaseReference dbRef =
+      FirebaseDatabase.instance.reference().child("Users");
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    super.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+  }
+
+  void logInToFb() {
+    firebaseAuth
+        .signInWithEmailAndPassword(
+            email: emailController.text, password: passwordController.text)
+        .then((result) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+            builder: (context) => NotePage(uid: result.user?.uid)),
+      );
+    }).catchError((err) {
+      print(err.message);
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text("Insert a correct data!"),
+              content: Text(err.message),
+              actions: [
+                TextButton(
+                  child: Text("Continue"),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                )
+              ],
+            );
+          });
+    });
+  }
+
   Widget _entryField(String title, TextInputType keyboardType,
+      TextEditingController controller, String field,
       {bool isPassword = false}) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
@@ -26,6 +74,7 @@ class _LoginPageState extends State<LoginPage> {
             height: 10,
           ),
           TextFormField(
+            controller: controller,
             keyboardType: keyboardType,
             style: TextStyle(color: Color(0xfff79c4f)),
             obscureText: isPassword,
@@ -41,6 +90,12 @@ class _LoginPageState extends State<LoginPage> {
               labelStyle: TextStyle(color: Colors.white),
               border: OutlineInputBorder(),
             ),
+            validator: (value) {
+              if (value!.isEmpty) {
+                return "Enter a correct " + field;
+              }
+              return null;
+            },
           ),
         ],
       ),
@@ -50,8 +105,9 @@ class _LoginPageState extends State<LoginPage> {
   Widget _submitButton() {
     return InkWell(
         onTap: () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => NotePage()));
+          logInToFb();
+          // Navigator.push(
+          //     context, MaterialPageRoute(builder: (context) => NotePage()));
         },
         child: Container(
           width: MediaQuery.of(context).size.width,
@@ -228,8 +284,11 @@ class _LoginPageState extends State<LoginPage> {
   Widget _emailPasswordWidget() {
     return Column(
       children: <Widget>[
-        _entryField("Email", TextInputType.emailAddress),
-        _entryField("Password", TextInputType.multiline, isPassword: true),
+        _entryField(
+            "Email", TextInputType.emailAddress, emailController, "Email"),
+        _entryField(
+            "Password", TextInputType.multiline, passwordController, "Password",
+            isPassword: true),
       ],
     );
   }
@@ -245,49 +304,52 @@ class _LoginPageState extends State<LoginPage> {
           Center(
             child: BackgroundContainer(),
           ),
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 20),
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  SizedBox(height: height * .2),
-                  _title(),
-                  SizedBox(height: 50),
-                  _emailPasswordWidget(),
-                  SizedBox(height: 20),
-                  _submitButton(),
-                  // Container(
-                  //   padding: EdgeInsets.symmetric(vertical: 10),
-                  //   alignment: Alignment.centerRight,
-                  //   child: Text('Forgot Password ?',
-                  //       style: TextStyle(
-                  //           color: Color(0xfff79c4f),
-                  //           fontSize: 14,
-                  //           fontWeight: FontWeight.w500)),
-                  // ),
-                  _divider(),
-                  _facebookButton(),
-                  FutureBuilder(
-                      future:
-                          Authentication.initializeFirebase(context: context),
-                      builder: (context, snapshot) {
-                        if (snapshot.hasError) {
-                          return Text('Error initializing Firebase');
-                        } else if (snapshot.connectionState ==
-                            ConnectionState.done) {
-                          return GoogleSignInButton();
-                        }
-                        return CircularProgressIndicator(
-                          valueColor: AlwaysStoppedAnimation<Color>(
-                            Colors.orange,
-                          ),
-                        );
-                      }),
-                  SizedBox(height: height * .055),
-                  _createAccountLabel(),
-                ],
+          Form(
+            key: _formKey,
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    SizedBox(height: height * .2),
+                    _title(),
+                    SizedBox(height: 50),
+                    _emailPasswordWidget(),
+                    SizedBox(height: 20),
+                    _submitButton(),
+                    // Container(
+                    //   padding: EdgeInsets.symmetric(vertical: 10),
+                    //   alignment: Alignment.centerRight,
+                    //   child: Text('Forgot Password ?',
+                    //       style: TextStyle(
+                    //           color: Color(0xfff79c4f),
+                    //           fontSize: 14,
+                    //           fontWeight: FontWeight.w500)),
+                    // ),
+                    _divider(),
+                    _facebookButton(),
+                    // FutureBuilder(
+                    //     future:
+                    //         Authentication.initializeFirebase(context: context),
+                    //     builder: (context, snapshot) {
+                    //       if (snapshot.hasError) {
+                    //         return Text('Error initializing Firebase');
+                    //       } else if (snapshot.connectionState ==
+                    //           ConnectionState.done) {
+                    //         return GoogleSignInButton();
+                    //       }
+                    //       return CircularProgressIndicator(
+                    //         valueColor: AlwaysStoppedAnimation<Color>(
+                    //           Colors.orange,
+                    //         ),
+                    //       );
+                    //     }),
+                    SizedBox(height: height * .055),
+                    _createAccountLabel(),
+                  ],
+                ),
               ),
             ),
           ),

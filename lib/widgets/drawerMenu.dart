@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:resumelife/screens/feedPage.dart';
 
@@ -71,12 +72,14 @@ class _DrawerMenuState extends State<DrawerMenu> {
               leading: Icon(Icons.logout, color: Colors.white),
               title: Text("Log out", style: TextStyle(color: Colors.white)),
               onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => WelcomePage(
-                              title: 'Welcome',
-                            )));
+                FirebaseAuth auth = FirebaseAuth.instance;
+                auth.signOut().then((res) {
+                  Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => WelcomePage(title: "Welcome")),
+                      (Route<dynamic> route) => false);
+                });
               },
             ),
           ],

@@ -140,7 +140,7 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
                         setState(() {
                           _isSigningOut = true;
                         });
-                        await Authentication.signOut(context: context);
+                        // await Authentication.signOut(context: context);
                         setState(() {
                           _isSigningOut = false;
                         });

@@ -7,7 +7,7 @@ import 'package:resumelife/widgets/backgroundContainer.dart';
 import 'package:resumelife/widgets/drawerMenu.dart';
 
 class NotePage extends StatefulWidget {
-  NotePage({Key? key}) : super(key: key);
+  NotePage({Key? key, String? uid}) : super(key: key);
 
   @override
   _NotePageState createState() => _NotePageState();
