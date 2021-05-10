@@ -1,37 +1,49 @@
 # Resume - make summaries
 
-Resume is a flutter application for making summaries that facilitate study. Just click and share and follow news knowledge.
+Resume is a Flutter application for making summaries that facilitate study. Just click and share and follow news knowledge.
+
+## Observations
+This project was developed using development standards like classes, interfaces, encapsulation.
+
+Work in progess (AC2):
+  - [x] Sign In, Sign Up, Logoff
+  - [ ] Database - CRUD to Users and Notes
+  - [ ] Push Notifications
+  - [ ] Share the application
+  - [x] Create the app with Cupertino and Material design
 
 ## Installation
 
-Use the flutter project to run in your device or emulator.
+Use the Flutter project (.apk or .ipa) to run in your device or emulator.
 
 ![devices](https://user-images.githubusercontent.com/26679371/113034645-b852ea00-9168-11eb-9f79-552f363c0849.PNG)
 
 ## Mockup
+
+Initial application design.
 
 [Simple mockup](https://app.moqups.com/uIMAF8jZIa/view/page/ae8fe8eb0/)
 
 ## Project
 
 #### 1. Welcome page
-This is the first page of the app. On this page, you can select if you like to Login or Sign In.
+This is the first page of the application. On this page, you can select if you like to Sign In or Sign Up.
 
 ![welcome](https://user-images.githubusercontent.com/26679371/113036077-382d8400-916a-11eb-9749-a5eedd0f44e1.jpeg)
 
 #### 2. Sign Up page
 On the Sign Up page is possible to create a new user, just put some information like: 
 
-> Username
+> Name
 
-> Email
+> E-mail
 
 > Password
 
 ![signup](https://user-images.githubusercontent.com/26679371/113036150-4ed3db00-916a-11eb-92f3-4718b273d98d.jpeg)
 
-#### 3. Sign In/Login page
-After registering, just log into the app and discover the possibilities.
+#### 3. Sign In page
+After registering, just log into the application and discover the possibilities.
 
 ![login](https://user-images.githubusercontent.com/26679371/113036299-7cb91f80-916a-11eb-8919-16bf6c504b27.jpeg)
 
@@ -59,9 +71,6 @@ On this page, you can edit all your profile information.
 Menu options.
 
 ![menu](https://user-images.githubusercontent.com/26679371/113036326-83479700-916a-11eb-8300-e6891f928bc5.jpeg)
-
-## Observations
-This project was developed using development standards like classes, encapsulation. It contains only screens with several widgets and their logical and functional routes.
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
