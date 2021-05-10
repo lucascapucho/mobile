@@ -74,7 +74,7 @@ class _ProfilePageState extends State<ProfilePage> {
       children: <Widget>[
         _entryField("Username", TextInputType.name),
         _entryField("Email", TextInputType.emailAddress),
-        _entryField("Description", TextInputType.multiline),
+        _entryField("About me", TextInputType.multiline),
         _entryField("Password", TextInputType.multiline, isPassword: true),
       ],
     );

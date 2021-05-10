@@ -1,9 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
+// ignore: import_of_legacy_library_into_null_safe
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:resumelife/utils/authentication.dart';
 import 'package:resumelife/widgets/backgroundContainer.dart';
-import 'package:resumelife/widgets/google_sign_in_button.dart';
 import 'signupPage.dart';
 import 'notePage.dart';
 
@@ -74,6 +73,7 @@ class _LoginPageState extends State<LoginPage> {
             height: 10,
           ),
           TextFormField(
+            autofocus: true,
             controller: controller,
             keyboardType: keyboardType,
             style: TextStyle(color: Color(0xfff79c4f)),
@@ -329,7 +329,7 @@ class _LoginPageState extends State<LoginPage> {
                     //           fontWeight: FontWeight.w500)),
                     // ),
                     _divider(),
-                    _facebookButton(),
+                    // _facebookButton(),
                     // FutureBuilder(
                     //     future:
                     //         Authentication.initializeFirebase(context: context),
