@@ -5,6 +5,7 @@ import 'package:resumelife/screens/feedPage.dart';
 import 'package:resumelife/screens/notePage.dart';
 import 'package:resumelife/screens/profilePage.dart';
 import 'package:resumelife/screens/welcomePage.dart';
+import 'package:share/share.dart';
 
 class DrawerMenu extends StatefulWidget {
   DrawerMenu({Key? key}) : super(key: key);
@@ -20,6 +21,14 @@ class _DrawerMenuState extends State<DrawerMenu> {
   void initState() {
     super.initState();
     color = Colors.transparent;
+  }
+
+  _shareAction(BuildContext context) {
+    final RenderBox box = context.findRenderObject() as RenderBox;
+    Share.share(
+        "This is the https://github.com/lucascapucho/mobile of the project",
+        subject: "Share the git project",
+        sharePositionOrigin: box.localToGlobal(Offset.zero) & box.size);
   }
 
   @override
@@ -60,12 +69,19 @@ class _DrawerMenuState extends State<DrawerMenu> {
               },
             ),
             new ListTile(
-              leading: Icon(Icons.share, color: Colors.white),
+              leading: Icon(Icons.language, color: Colors.white),
               title:
                   Text("Global notes", style: TextStyle(color: Colors.white)),
               onTap: () {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => FeedPage()));
+              },
+            ),
+            new ListTile(
+              leading: Icon(Icons.share, color: Colors.white),
+              title: Text("Share", style: TextStyle(color: Colors.white)),
+              onTap: () {
+                _shareAction(context);
               },
             ),
             new ListTile(

@@ -7,9 +7,9 @@ This project was developed using development standards like classes, interfaces,
 
 Work in progess (AC2):
   - [x] Sign In, Sign Up, Logoff
-  - [ ] Database - CRUD to Users and Notes
-  - [X] Push Notifications - At 12:00
-  - [ ] Share the application
+  - [ ] Database - CRUD
+  - [X] Push Notifications - At 12:00 PM
+  - [X] Share the GitHub page - Located in menu 
   - [x] Create the app with Cupertino and Material design
 
 ## Installation

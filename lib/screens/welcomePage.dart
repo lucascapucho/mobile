@@ -1,7 +1,7 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:resumelife/widgets/backgroundContainer.dart';
-
 import 'loginPage.dart';
 import 'signupPage.dart';
 
@@ -15,11 +15,12 @@ class WelcomePage extends StatefulWidget {
 }
 
 class _WelcomePageState extends State<WelcomePage> {
-  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
+  late FirebaseMessaging _firebaseMessaging;
 
   @override
   void initState() {
     super.initState();
+    _firebaseMessaging = FirebaseMessaging.instance;
     _firebaseMessaging.getToken().then((value) {
       print(value);
     });
