@@ -7,10 +7,11 @@ This project was developed using development standards like classes, interfaces,
 
 Work in progess (AC2):
   - [x] Sign In, Sign Up, Logoff
-  - [ ] Database - CRUD
-  - [X] Push Notifications - At 12:00 PM
-  - [X] Share the GitHub page - Located in menu 
-  - [x] Create the app with Cupertino and Material design
+  - [X] Database - When register is created I set a database to save username, email and password based in your userID (SET and GET)
+  - [X] Push Notifications - All day at 12:00 PM
+  - [X] Share the GitHub page - Located in menu (Share button)
+  - [ ] Release version - Using FastLine
+  - [x] Create the app with Cupertino and Material design - Current conventions
 
 ## Installation
 
