@@ -6,11 +6,11 @@ Resume is a Flutter application for making summaries that facilitate study. Just
 This project was developed using development standards like classes, interfaces, encapsulation.
 
 Work in progess (AC2):
-  - [x] Sign In, Sign Up, Logoff
-  - [X] Database - When register is created I set a database to save username, email and password based in your userID (SET and GET)
-  - [X] Push Notifications - All day at 12:00 PM
-  - [X] Share the GitHub page - Located in menu (Share button)
-  - [ ] Release version - Using FastLine
+  - [x] Sign In, Sign Up, Logoff - With Firebase Auth
+  - [ ] Database - When register is created a db and setted the username, email and password based in your userID (SET)
+  - [X] Push Notifications - All day at 12:00 PM with Firebase message
+  - [X] Share option - Have the option to share the GitHub page, located in menu (Share button)
+  - [x] Release version - Firebase app distribuition
   - [x] Create the app with Cupertino and Material design - Current conventions
 
 ## Installation
