@@ -1,4 +1,0 @@
-io/flutter/plugins/GeneratedPluginRegistrant.java
- io.flutter.plugins.GeneratedPluginRegistrant
-com/capucho/resumelife_firebase/BuildConfig.java
- com.capucho.resumelife_firebase.BuildConfig

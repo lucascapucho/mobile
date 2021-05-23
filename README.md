@@ -8,9 +8,9 @@ This project was developed using development standards like classes, interfaces,
 Work in progess (AC2):
   - [x] Sign In, Sign Up, Logoff - With Firebase Auth
   - [ ] Database - When register is created a db and setted the username, email and password based in your userID (SET)
-  - [X] Push Notifications - All day at 12:00 PM with Firebase message
+  - [X] Push Notifications - All day at 12:00 and 18:00 with Firebase message
   - [X] Share option - Have the option to share the GitHub page, located in menu (Share button)
-  - [x] Release version - Firebase app distribuition
+  - [x] Release version - Firebase app distribuition and git distribuition
   - [x] Create the app with Cupertino and Material design - Current conventions
 
 ## Installation
