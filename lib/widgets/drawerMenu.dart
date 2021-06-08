@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:resumelife/screens/feedPage.dart';
 
@@ -8,7 +11,8 @@ import 'package:resumelife/screens/welcomePage.dart';
 import 'package:share/share.dart';
 
 class DrawerMenu extends StatefulWidget {
-  DrawerMenu({Key? key}) : super(key: key);
+  final String uid;
+  DrawerMenu(Type string, this.uid, {Key? key}) : super(key: key);
 
   @override
   _DrawerMenuState createState() => _DrawerMenuState();
@@ -17,10 +21,32 @@ class DrawerMenu extends StatefulWidget {
 class _DrawerMenuState extends State<DrawerMenu> {
   late Color color;
 
+  DatabaseReference usersRef =
+      FirebaseDatabase.instance.reference().child("Users");
+
   @override
   void initState() {
     super.initState();
     color = Colors.transparent;
+  }
+
+  String getToFb(String name) {
+    String a = "";
+    usersRef
+        .orderByKey()
+        .equalTo(widget.uid)
+        .once()
+        .then((DataSnapshot snapshot) {
+      // print('Data : ${snapshot.value}');
+      // print(snapshot.value[widget.uid][name]);
+      a = (snapshot.value[widget.uid][name]);
+      return (snapshot.value[widget.uid][name]);
+      // for (DataSnapshot ds in snapshot.value.child()) {
+      //   username = ds.value.child("username").getValue(String);
+      // }
+    });
+    print('teste: $a');
+    return a;
   }
 
   _shareAction(BuildContext context) {
@@ -44,7 +70,7 @@ class _DrawerMenuState extends State<DrawerMenu> {
                 color: Colors.purple.shade800,
               ),
               accountEmail:
-                  Text("user@mail.com", style: TextStyle(color: Colors.white)),
+                  Text(getToFb("email"), style: TextStyle(color: Colors.white)),
               accountName:
                   Text("Lucas Araujo", style: TextStyle(color: Colors.white)),
               currentAccountPicture: CircleAvatar(
@@ -56,16 +82,20 @@ class _DrawerMenuState extends State<DrawerMenu> {
               leading: Icon(Icons.person, color: Colors.white),
               title: Text("Profile", style: TextStyle(color: Colors.white)),
               onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => ProfilePage()));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ProfilePage(widget.uid)));
               },
             ),
             new ListTile(
               leading: Icon(Icons.home, color: Colors.white),
               title: Text("My notes", style: TextStyle(color: Colors.white)),
               onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => NotePage()));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => NotePage(widget.uid)));
               },
             ),
             new ListTile(
@@ -73,8 +103,10 @@ class _DrawerMenuState extends State<DrawerMenu> {
               title:
                   Text("Global notes", style: TextStyle(color: Colors.white)),
               onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => FeedPage()));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => FeedPage(widget.uid)));
               },
             ),
             new ListTile(

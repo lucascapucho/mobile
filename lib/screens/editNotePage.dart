@@ -19,7 +19,8 @@ import 'package:tuple/tuple.dart';
 import 'notePage.dart';
 
 class EditNotePage extends StatefulWidget {
-  EditNotePage({Key? key}) : super(key: key);
+  final String uid;
+  EditNotePage(this.uid, {Key? key}) : super(key: key);
 
   @override
   _EditNotePageState createState() => _EditNotePageState();
@@ -83,8 +84,10 @@ class _EditNotePageState extends State<EditNotePage> {
               padding: EdgeInsets.only(right: 20.0),
               child: GestureDetector(
                 onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => NotePage()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => NotePage(widget.uid)));
                 },
                 child: Icon(
                   Icons.cancel_rounded,

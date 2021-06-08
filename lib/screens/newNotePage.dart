@@ -20,7 +20,8 @@ import 'package:tuple/tuple.dart';
 import 'notePage.dart';
 
 class NewNotePage extends StatefulWidget {
-  NewNotePage({Key? key}) : super(key: key);
+  final String uid;
+  NewNotePage(this.uid, {Key? key}) : super(key: key);
 
   @override
   _NewNotePageState createState() => _NewNotePageState();
@@ -84,8 +85,10 @@ class _NewNotePageState extends State<NewNotePage> {
               padding: EdgeInsets.only(right: 20.0),
               child: GestureDetector(
                 onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => NotePage()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => NotePage(widget.uid)));
                 },
                 child: Icon(
                   Icons.cancel_rounded,
@@ -94,7 +97,7 @@ class _NewNotePageState extends State<NewNotePage> {
               )),
         ],
       ),
-      drawer: DrawerMenu(),
+      drawer: DrawerMenu(String, widget.uid),
       body: Container(
         height: height,
         child: Stack(children: <Widget>[

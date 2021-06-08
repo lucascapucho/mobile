@@ -6,7 +6,8 @@ import 'package:resumelife/widgets/backgroundContainer.dart';
 import 'package:resumelife/widgets/drawerMenu.dart';
 
 class ProfilePage extends StatefulWidget {
-  ProfilePage({Key? key}) : super(key: key);
+  final String uid;
+  ProfilePage(this.uid, {Key? key}) : super(key: key);
 
   @override
   _ProfilePageState createState() => _ProfilePageState();
@@ -16,8 +17,8 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget _submitButton() {
     return InkWell(
       onTap: () {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => NotePage()));
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => NotePage(widget.uid)));
       },
       child: Container(
         width: MediaQuery.of(context).size.width,
@@ -91,7 +92,7 @@ class _ProfilePageState extends State<ProfilePage> {
         // elevation: .0,
         title: Text('Profile details'),
       ),
-      drawer: DrawerMenu(),
+      drawer: DrawerMenu(String, widget.uid),
       body: Container(
         height: height,
         child: Stack(

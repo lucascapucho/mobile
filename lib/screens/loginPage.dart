@@ -37,8 +37,7 @@ class _LoginPageState extends State<LoginPage> {
         .then((result) {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(
-            builder: (context) => NotePage(uid: result.user?.uid)),
+        MaterialPageRoute(builder: (context) => NotePage(result.user!.uid)),
       );
     }).catchError((err) {
       print(err.message);

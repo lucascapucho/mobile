@@ -7,7 +7,8 @@ import 'package:resumelife/widgets/backgroundContainer.dart';
 import 'package:resumelife/widgets/drawerMenu.dart';
 
 class NotePage extends StatefulWidget {
-  NotePage({Key? key, String? uid}) : super(key: key);
+  final String uid;
+  NotePage(this.uid, {Key? key}) : super(key: key);
 
   @override
   _NotePageState createState() => _NotePageState();
@@ -25,7 +26,9 @@ class _NotePageState extends State<NotePage> {
         isThreeLine: true,
         onTap: () {
           Navigator.push(
-              context, MaterialPageRoute(builder: (context) => EditNotePage()));
+              context,
+              MaterialPageRoute(
+                  builder: (context) => EditNotePage(widget.uid)));
         },
       ),
     );
@@ -46,8 +49,10 @@ class _NotePageState extends State<NotePage> {
             padding: EdgeInsets.only(right: 20.0),
             child: GestureDetector(
               onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => NewNotePage()));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => NewNotePage(widget.uid)));
               },
               child: Icon(
                 Icons.add_box,
@@ -57,7 +62,7 @@ class _NotePageState extends State<NotePage> {
           ),
         ],
       ),
-      drawer: DrawerMenu(),
+      drawer: DrawerMenu(String, widget.uid),
       body: Container(
         height: height,
         child: Stack(children: <Widget>[

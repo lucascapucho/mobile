@@ -23,7 +23,7 @@ class _SignUpPageState extends State<TestePage> {
         actions: [],
         // elevation: .0,
       ),
-      drawer: DrawerMenu(),
+      // drawer: DrawerMenu(),
       body: Container(
         height: height,
         child: Stack(children: <Widget>[

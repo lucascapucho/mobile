@@ -5,7 +5,8 @@ import 'package:resumelife/widgets/backgroundContainer.dart';
 import 'package:resumelife/widgets/drawerMenu.dart';
 
 class FeedPage extends StatefulWidget {
-  FeedPage({Key? key}) : super(key: key);
+  final String uid;
+  FeedPage(this.uid, {Key? key}) : super(key: key);
 
   @override
   _FeedPageState createState() => _FeedPageState();
@@ -40,7 +41,7 @@ class _FeedPageState extends State<FeedPage> {
         // elevation: .0,
         title: Text('Global notes'),
       ),
-      drawer: DrawerMenu(),
+      drawer: DrawerMenu(String, widget.uid),
       body: Container(
         height: height,
         child: Stack(children: <Widget>[

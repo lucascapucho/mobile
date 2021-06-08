@@ -43,8 +43,7 @@ class _SignUpPageState extends State<SignUpPage> {
       }).then((res) {
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(
-              builder: (context) => NotePage(uid: result.user!.uid)),
+          MaterialPageRoute(builder: (context) => NotePage(result.user!.uid)),
         );
       });
     }).catchError((err) {
