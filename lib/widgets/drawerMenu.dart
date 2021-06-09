@@ -1,10 +1,8 @@
-import 'dart:convert';
-
+import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:resumelife/screens/feedPage.dart';
-
 import 'package:resumelife/screens/notePage.dart';
 import 'package:resumelife/screens/profilePage.dart';
 import 'package:resumelife/screens/welcomePage.dart';
@@ -19,34 +17,34 @@ class DrawerMenu extends StatefulWidget {
 }
 
 class _DrawerMenuState extends State<DrawerMenu> {
-  late Color color;
+  String user = "  ";
+  String email = "";
 
-  DatabaseReference usersRef =
+  DatabaseReference userRef =
       FirebaseDatabase.instance.reference().child("Users");
 
   @override
   void initState() {
     super.initState();
-    color = Colors.transparent;
+    _getToFb("username");
+    _getToFb("email");
   }
 
-  String getToFb(String name) {
-    String a = "";
-    usersRef
+  // Get username and password from firebase database
+  Future<void> _getToFb(String name) async {
+    userRef
         .orderByKey()
         .equalTo(widget.uid)
         .once()
         .then((DataSnapshot snapshot) {
-      // print('Data : ${snapshot.value}');
-      // print(snapshot.value[widget.uid][name]);
-      a = (snapshot.value[widget.uid][name]);
-      return (snapshot.value[widget.uid][name]);
-      // for (DataSnapshot ds in snapshot.value.child()) {
-      //   username = ds.value.child("username").getValue(String);
-      // }
+      setState(() {
+        if (name == "username") {
+          user = (snapshot.value[widget.uid][name]);
+        } else {
+          email = (snapshot.value[widget.uid][name]);
+        }
+      });
     });
-    print('teste: $a');
-    return a;
   }
 
   _shareAction(BuildContext context) {
@@ -59,6 +57,10 @@ class _DrawerMenuState extends State<DrawerMenu> {
 
   @override
   Widget build(BuildContext context) {
+    if (user == "  " && email == "") {
+      sleep(const Duration(milliseconds: 40));
+    }
+
     return Drawer(
       child: Container(
         color: Colors.purple.shade800,
@@ -69,13 +71,12 @@ class _DrawerMenuState extends State<DrawerMenu> {
               decoration: BoxDecoration(
                 color: Colors.purple.shade800,
               ),
-              accountEmail:
-                  Text(getToFb("email"), style: TextStyle(color: Colors.white)),
-              accountName:
-                  Text("Lucas Araujo", style: TextStyle(color: Colors.white)),
+              accountEmail: Text(email, style: TextStyle(color: Colors.white)),
+              accountName: Text(user, style: TextStyle(color: Colors.white)),
               currentAccountPicture: CircleAvatar(
                 backgroundColor: Colors.white,
-                child: Text("LA", style: TextStyle(color: Color(0xffe46b10))),
+                child: Text(user.substring(0, 2),
+                    style: TextStyle(color: Color(0xffe46b10))),
               ),
             ),
             new ListTile(
