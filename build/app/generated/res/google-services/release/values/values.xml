@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_web_client_id" translatable="false">791357011849-mh10h8c0hgbsoqkg9neofrpgplp3142o.apps.googleusercontent.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">791357011849</string>
+    <string name="google_api_key" translatable="false">AIzaSyBN7eHtmpGTT0VU1awVJKvmtUI33O1dxsU</string>
+    <string name="google_app_id" translatable="false">1:791357011849:android:8a25837240b239aa0c1358</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyBN7eHtmpGTT0VU1awVJKvmtUI33O1dxsU</string>
+    <string name="google_storage_bucket" translatable="false">resumelife-1a995.appspot.com</string>
+    <string name="project_id" translatable="false">resumelife-1a995</string>
+</resources>
