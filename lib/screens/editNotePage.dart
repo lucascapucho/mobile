@@ -18,13 +18,16 @@ import 'package:path_provider/path_provider.dart';
 import 'package:resumelife/widgets/backgroundContainer.dart';
 import 'package:tuple/tuple.dart';
 
+import 'feedPage.dart';
 import 'notePage.dart';
 
 class EditNotePage extends StatefulWidget {
   final String uid;
   final String noteKey;
   final String json;
-  EditNotePage(this.uid, this.noteKey, this.json, {Key? key}) : super(key: key);
+  final bool edit;
+  EditNotePage(this.uid, this.noteKey, this.json, this.edit, {Key? key})
+      : super(key: key);
 
   @override
   _EditNotePageState createState() => _EditNotePageState();
@@ -35,6 +38,7 @@ class _EditNotePageState extends State<EditNotePage> {
   late QuillController _controller;
   final FocusNode _focusNode = FocusNode();
   String updatedJson = "";
+  Color colorSave = Colors.white;
 
   DatabaseReference noteRef =
       FirebaseDatabase.instance.reference().child("Notes");
@@ -43,6 +47,9 @@ class _EditNotePageState extends State<EditNotePage> {
   void initState() {
     super.initState();
     _loadFromFb();
+    if (widget.edit) {
+      colorSave = Colors.black45;
+    }
   }
 
   _updateFb(String actualJson) {
@@ -93,15 +100,18 @@ class _EditNotePageState extends State<EditNotePage> {
             child: GestureDetector(
               onTap: () {
                 // if (_formKey.currentState!.validate()) {s
-                _updateFb(jsonEncode(_controller.document.toDelta().toJson()));
-                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                    content: Text('You successfully edit the note!'),
-                    backgroundColor: Colors.green[300]));
-                // }
+                if (!widget.edit) {
+                  _updateFb(
+                      jsonEncode(_controller.document.toDelta().toJson()));
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content: Text('You successfully edit the note!'),
+                      backgroundColor: Colors.green[300]));
+                }
               },
               child: Icon(
                 Icons.save,
                 size: 26.0,
+                color: colorSave,
               ),
             ),
           ),
@@ -109,10 +119,17 @@ class _EditNotePageState extends State<EditNotePage> {
               padding: EdgeInsets.only(right: 20.0),
               child: GestureDetector(
                 onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => NotePage(widget.uid)));
+                  if (widget.edit) {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => FeedPage(widget.uid)));
+                  } else {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => NotePage(widget.uid)));
+                  }
                 },
                 child: Icon(
                   Icons.cancel_rounded,
@@ -158,7 +175,7 @@ class _EditNotePageState extends State<EditNotePage> {
         scrollable: true,
         focusNode: _focusNode,
         autoFocus: false,
-        readOnly: false,
+        readOnly: widget.edit,
         placeholder: 'Add content',
         expands: false,
         padding: EdgeInsets.zero,
@@ -182,7 +199,7 @@ class _EditNotePageState extends State<EditNotePage> {
           scrollable: true,
           focusNode: _focusNode,
           autoFocus: false,
-          readOnly: false,
+          readOnly: widget.edit,
           placeholder: 'Add content',
           expands: false,
           padding: EdgeInsets.zero,

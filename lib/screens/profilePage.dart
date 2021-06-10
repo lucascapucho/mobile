@@ -75,7 +75,6 @@ class _ProfilePageState extends State<ProfilePage> {
       children: <Widget>[
         _entryField("Username", TextInputType.name),
         _entryField("Email", TextInputType.emailAddress),
-        _entryField("About me", TextInputType.multiline),
         _entryField("Password", TextInputType.multiline, isPassword: true),
       ],
     );
@@ -86,11 +85,9 @@ class _ProfilePageState extends State<ProfilePage> {
     final height = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      // extendBodyBehindAppBar: true,
       appBar: AppBar(
         backgroundColor: Colors.purple,
-        // elevation: .0,
-        title: Text('Profile details'),
+        title: Text('Profile'),
       ),
       drawer: DrawerMenu(String, widget.uid),
       body: Container(
@@ -107,7 +104,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    profilePicture(),
+                    _profilePicture(),
                     _profileEntries(),
                     SizedBox(
                       height: 20,
@@ -124,7 +121,7 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-  Widget profilePicture() {
+  Widget _profilePicture() {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -134,11 +131,11 @@ class _ProfilePageState extends State<ProfilePage> {
           child: Stack(
             children: <Widget>[
               CircleAvatar(
-                radius: 70,
+                radius: 50,
                 child: ClipOval(
                   child: Icon(
                     Icons.person,
-                    size: 70.0,
+                    size: 50.0,
                   ),
                 ),
               ),
@@ -153,7 +150,8 @@ class _ProfilePageState extends State<ProfilePage> {
                       color: Colors.white,
                     ),
                     decoration: BoxDecoration(
-                        color: Color(0xfff79c4f),
+                        color: Colors.black45,
+                        // Color(0xfff79c4f),
                         borderRadius: BorderRadius.all(Radius.circular(20))),
                   ))
             ],

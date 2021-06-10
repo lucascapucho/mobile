@@ -30,7 +30,7 @@ class _DrawerMenuState extends State<DrawerMenu> {
     _getToFb("email");
   }
 
-  // Get username and password from firebase database
+  // Get username and email from firebase database
   Future<void> _getToFb(String name) async {
     userRef
         .orderByKey()
@@ -80,13 +80,13 @@ class _DrawerMenuState extends State<DrawerMenu> {
               ),
             ),
             new ListTile(
-              leading: Icon(Icons.person, color: Colors.white),
-              title: Text("Profile", style: TextStyle(color: Colors.white)),
+              leading: Icon(Icons.person, color: Colors.black38),
+              title: Text("Profile", style: TextStyle(color: Colors.black38)),
               onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => ProfilePage(widget.uid)));
+                // Navigator.push(
+                //     context,
+                //     MaterialPageRoute(
+                //         builder: (context) => ProfilePage(widget.uid)));
               },
             ),
             new ListTile(

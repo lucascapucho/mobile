@@ -121,7 +121,8 @@ class _NotePageState extends State<NotePage> {
                                     builder: (context) => EditNotePage(
                                         widget.uid,
                                         item[index]["title"],
-                                        item[index]["json"])));
+                                        item[index]["json"],
+                                        false)));
                           },
                         ),
                       );

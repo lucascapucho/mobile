@@ -1,8 +1,10 @@
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
-import 'package:resumelife/screens/readOnlyPage.dart';
 import 'package:resumelife/widgets/backgroundContainer.dart';
 import 'package:resumelife/widgets/drawerMenu.dart';
+
+import 'editNotePage.dart';
 
 class FeedPage extends StatefulWidget {
   final String uid;
@@ -13,21 +15,84 @@ class FeedPage extends StatefulWidget {
 }
 
 class _FeedPageState extends State<FeedPage> {
-  Widget _myCard(BuildContext context, String title, String subtitle,
-      String author, String publishData) {
-    return new Card(
-      child: ListTile(
-        leading: FlutterLogo(size: 72.0),
-        title: Text(title),
-        subtitle: Text(subtitle),
-        trailing: Icon(Icons.share),
-        isThreeLine: true,
-        onTap: () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => ReadOnlyPage()));
-        },
-      ),
-    );
+  DatabaseReference noteRef =
+      FirebaseDatabase.instance.reference().child("Notes");
+
+  _getShareColor(bool share) {
+    if (share) {
+      return Color(0xfff79c4f);
+    } else {
+      return Colors.black54;
+    }
+  }
+
+  Widget _myCards(BuildContext context) {
+    var comments = FirebaseDatabase.instance
+        .reference()
+        .child("Notes")
+        .orderByChild("public")
+        .equalTo(true)
+        .onValue;
+
+    return StreamBuilder(
+        stream: comments,
+        builder: (context, AsyncSnapshot snap) {
+          switch (snap.connectionState) {
+            case ConnectionState.none:
+            case ConnectionState.waiting:
+              return LinearProgressIndicator(
+                color: Colors.white,
+                backgroundColor: Color(0xfff79c4f),
+              );
+            default:
+              if (snap.hasError) {
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    content: Text('Cannot load or no data!'),
+                    backgroundColor: Colors.red));
+                return Center(
+                  child: Text("Invalid database data!"),
+                );
+              } else {
+                if (snap.hasData && snap.data.snapshot.value != null) {
+                  Map data = snap.data.snapshot.value;
+                  List item = [];
+                  data.forEach(
+                      (index, data) => item.add({"key": index, ...data}));
+
+                  return ListView.builder(
+                    itemCount: item.length,
+                    itemBuilder: (context, index) {
+                      return Card(
+                        child: ListTile(
+                          leading: FlutterLogo(size: 72.0),
+                          trailing: Icon(Icons.share,
+                              color: _getShareColor(item[index]['public'])),
+                          isThreeLine: true,
+                          focusColor: Colors.amber,
+                          title: Text(item[index]['title']),
+                          subtitle: Text(item[index]['date'].substring(0, 10)),
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => EditNotePage(
+                                        widget.uid,
+                                        item[index]["title"],
+                                        item[index]["json"],
+                                        true)));
+                          },
+                        ),
+                      );
+                    },
+                  );
+                }
+              }
+          }
+          return LinearProgressIndicator(
+            color: Colors.white,
+            backgroundColor: Color(0xfff79c4f),
+          );
+        });
   }
 
   @override
@@ -35,10 +100,8 @@ class _FeedPageState extends State<FeedPage> {
     final height = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      // extendBodyBehindAppBar: true,
       appBar: AppBar(
         backgroundColor: Colors.purple,
-        // elevation: .0,
         title: Text('Global notes'),
       ),
       drawer: DrawerMenu(String, widget.uid),
@@ -70,15 +133,7 @@ class _FeedPageState extends State<FeedPage> {
                   hintStyle: TextStyle(color: Colors.black)),
             ),
           ),
-          ListView(
-            padding: EdgeInsets.fromLTRB(.0, 75.0, .0, .0),
-            children: <Widget>[
-              // Padding(padding: EdgeInsets.all(15.0)),
-              _myCard(context, 'Title 1', 'Subtitle 1', 'Author 1', '29/03'),
-              _myCard(context, 'Title 2', 'Subtitle 2', 'Author 2', '29/03'),
-              _myCard(context, 'Title 3', 'Subtitle 3', 'Author 3', '29/03'),
-            ],
-          ),
+          _myCards(context)
         ]),
       ),
     );
