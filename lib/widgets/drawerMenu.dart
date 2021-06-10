@@ -58,7 +58,7 @@ class _DrawerMenuState extends State<DrawerMenu> {
   @override
   Widget build(BuildContext context) {
     if (user == "  " && email == "") {
-      sleep(const Duration(milliseconds: 40));
+      sleep(const Duration(milliseconds: 80));
     }
 
     return Drawer(

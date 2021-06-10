@@ -73,7 +73,10 @@ Menu options.
 
 ![menu](https://user-images.githubusercontent.com/26679371/113036326-83479700-916a-11eb-8300-e6891f928bc5.jpeg)
 
-## Contributing
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
-
-Please make sure to update tests as appropriate.
+## Commands
+flutter:
+  flutter pub upgrade
+  flutter pub upgrade --major-versions
+  flutter clean
+  flutter pub get
+  flutter run
