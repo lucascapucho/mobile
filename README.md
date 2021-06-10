@@ -5,9 +5,15 @@ Resume is a Flutter application for making summaries that facilitate study. Just
 ## Observations
 This project was developed using development standards like classes, interfaces, encapsulation.
 
-Work in progess (AC2):
+Future features:
+  - [ ] Edit Profile - Username, email, password, photo
+  - [ ] Searching bar in Global Notes screen
+  - [ ] Animations in all screens - To make more soft transfitions and loadings
+  - [ ] New colors - Simply design
+
+AC2:
   - [x] Sign In, Sign Up, Logoff - With Firebase Auth
-  - [ ] Database - When register is created a db and setted the username, email and password based in your userID (SET)
+  - [X] Database - When register is created a db and setted the username, email and password based in your userID (SET)
   - [X] Push Notifications - All day at 12:00 and 18:00 with Firebase message
   - [X] Share option - Have the option to share the GitHub page, located in menu (Share button)
   - [x] Release version - Firebase app distribuition and git distribuition
@@ -74,9 +80,10 @@ Menu options.
 ![menu](https://user-images.githubusercontent.com/26679371/113036326-83479700-916a-11eb-8300-e6891f928bc5.jpeg)
 
 ## Commands
-flutter:
-  flutter pub upgrade
-  flutter pub upgrade --major-versions
-  flutter clean
-  flutter pub get
-  flutter run
+```cmd
+flutter pub upgrade
+flutter pub upgrade --major-versions
+flutter clean
+flutter pub get
+flutter run
+```
